@@ -3,7 +3,10 @@ package com.bookstore.bookstore.service;
 import com.bookstore.bookstore.domain.Product;
 import com.bookstore.bookstore.exception.ResourceNotFoundException;
 import com.bookstore.bookstore.persistance.ProductRepository;
-import com.bookstore.bookstore.transfer.product.*;
+import com.bookstore.bookstore.transfer.product.CreateProductRequest;
+import com.bookstore.bookstore.transfer.product.GetProductsRequest;
+import com.bookstore.bookstore.transfer.product.ProductResponse;
+import com.bookstore.bookstore.transfer.product.UpdateProductRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -11,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,7 +88,6 @@ public class ProductService {
     }
 
 
-
     public Product updateProduct(long id, UpdateProductRequest request) {
         LOGGER.info("Updating product: {}", id);
 
@@ -96,7 +99,7 @@ public class ProductService {
     }
 
 
-
+    @Transactional
     public void deleteProduct(long id) {
         LOGGER.info("Deleting product: {}", id);
 

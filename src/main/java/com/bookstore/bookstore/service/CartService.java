@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -80,6 +81,23 @@ public class CartService {
 
         return cartResponse;
     }
+
+    public double getTotalPrice(long cartId) {
+        LOGGER.info("Retrieving total price for cart: {}", cartId);
+
+        Cart cart = cartRepository.findById(cartId).orElse(new Cart());
+
+        Set<Product> products = cart.getProducts();
+
+
+        for (Product product : products) {
+
+            cart.setTotalPrice(cart.getTotalPrice() + product.getPrice());
+        }
+
+        return cart.getTotalPrice();
+    }
+
 
     @Transactional
     public void deleteProductFromCart(long userId, long productId) {

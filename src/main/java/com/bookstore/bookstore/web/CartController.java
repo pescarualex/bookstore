@@ -3,12 +3,14 @@ package com.bookstore.bookstore.web;
 import com.bookstore.bookstore.service.CartService;
 import com.bookstore.bookstore.transfer.cart.AddProductToCartRequest;
 import com.bookstore.bookstore.transfer.cart.CartResponse;
+import com.bookstore.bookstore.transfer.cart.ProductInCart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Set;
 
 @CrossOrigin
 @RestController
@@ -34,6 +36,13 @@ public class CartController {
         CartResponse cart = cartService.getCart(id);
 
         return ResponseEntity.ok(cart);
+    }
+
+    @GetMapping
+    public ResponseEntity<Double> getTotalPrice(@RequestParam long cartId) {
+        double totalPrice = cartService.getTotalPrice(cartId);
+
+        return new ResponseEntity<>(totalPrice, HttpStatus.OK);
     }
 
     @DeleteMapping

@@ -9,7 +9,7 @@ public class Cart {
 
     @Id
     private long id;
-
+    private double totalPrice;
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId
     private User user;
@@ -46,6 +46,14 @@ public class Cart {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public User getUser() {
