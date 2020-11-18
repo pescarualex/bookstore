@@ -86,12 +86,9 @@ public class CartService {
         LOGGER.info("Retrieving total price for cart: {}", cartId);
 
         Cart cart = cartRepository.findById(cartId).orElse(new Cart());
-
         Set<Product> products = cart.getProducts();
 
-
         for (Product product : products) {
-
             cart.setTotalPrice(cart.getTotalPrice() + product.getPrice());
         }
 
