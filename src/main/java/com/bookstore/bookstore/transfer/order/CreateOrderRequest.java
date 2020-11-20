@@ -1,16 +1,14 @@
 package com.bookstore.bookstore.transfer.order;
 
 import com.bookstore.bookstore.domain.Product;
-import com.bookstore.bookstore.transfer.cart.ProductInCart;
 
 import javax.validation.constraints.NotNull;
-import java.util.List;
 import java.util.Set;
 
 public class CreateOrderRequest {
 
     @NotNull
-    private Set<ProductInCart> products;
+    private Set<Long> productsId;
     @NotNull
     private long userId;
     @NotNull
@@ -29,12 +27,12 @@ public class CreateOrderRequest {
     private Double phoneNumber;
 
 
-    public Set<ProductInCart> getProducts() {
-        return products;
+    public Set<Long> getProductsId() {
+        return productsId;
     }
 
-    public void setProducts(Set<ProductInCart> products) {
-        this.products = products;
+    public void setProductsId(Set<Long> productsId) {
+        this.productsId = productsId;
     }
 
     public long getUserId() {

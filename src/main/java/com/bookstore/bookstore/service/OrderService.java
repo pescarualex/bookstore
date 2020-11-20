@@ -5,7 +5,6 @@ import com.bookstore.bookstore.domain.Order;
 import com.bookstore.bookstore.domain.Product;
 import com.bookstore.bookstore.domain.User;
 import com.bookstore.bookstore.persistance.OrderRepository;
-import com.bookstore.bookstore.transfer.cart.ProductInCart;
 import com.bookstore.bookstore.transfer.order.CreateOrderRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,13 +23,13 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final UserService userService;
-    private final CartService cartService;
+    private final ProductService productService;
 
     @Autowired
-    public OrderService(OrderRepository orderRepository, UserService userService, CartService cartService) {
+    public OrderService(OrderRepository orderRepository, UserService userService, ProductService productService) {
         this.orderRepository = orderRepository;
         this.userService = userService;
-        this.cartService = cartService;
+        this.productService = productService;
     }
 
 
@@ -40,8 +39,15 @@ public class OrderService {
 
         User user = userService.getUser(request.getUserId());
 
-        Set<ProductInCart> products = cartService.getCart(user.getId()).getProducts();
+        Set<Long> productsId = request.getProductsId();
+        Set<Product> products = new HashSet<>();
 
+        for (Product pr : products ) {
+            for (Long id : productsId) {
+                pr.setId(id);
+            }
+            products.add(pr);
+        }
 
         Address address = new Address();
         address.setFirstName(request.getFirstName());
