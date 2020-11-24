@@ -1,9 +1,8 @@
 package com.bookstore.bookstore.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
@@ -27,6 +26,17 @@ public class Product {
 
     @ManyToMany(mappedBy = "products")
     private Set<Cart> carts = new HashSet<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Order order;
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
 
     public Long getId() {
         return id;

@@ -1,44 +1,40 @@
 package com.bookstore.bookstore.transfer.order;
 
-import javax.validation.constraints.NotNull;
+import com.bookstore.bookstore.domain.Product;
+import com.bookstore.bookstore.domain.User;
+
+import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
-public class CreateOrderRequest {
+public class OrderResponse {
 
-    @NotNull
-    private Set<Long> productId;
-    @NotNull
-    private long userId;
-    @NotNull
+    private long id;
+    private LocalDate dateCreated;
     private String firstName;
-    @NotNull
     private String lastName;
-    @NotNull
     private String city;
-    @NotNull
     private String country;
-    @NotNull
     private String address;
-    @NotNull
     private String email;
-    @NotNull
     private Double phoneNumber;
+    private Set<Product> products = new HashSet<>();
+    private User user;
 
-
-    public Set<Long> getProductId() {
-        return productId;
+    public long getId() {
+        return id;
     }
 
-    public void setProductId(Set<Long> productId) {
-        this.productId = productId;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public long getUserId() {
-        return userId;
+    public LocalDate getDateCreated() {
+        return dateCreated;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setDateCreated(LocalDate dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
     public String getFirstName() {
@@ -97,10 +93,27 @@ public class CreateOrderRequest {
         this.phoneNumber = phoneNumber;
     }
 
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
-        return "CreateOrderRequest{" +
-                "userId=" + userId +
+        return "OrderResponse{" +
+                "id=" + id +
+                ", dateCreated=" + dateCreated +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", city='" + city + '\'' +
@@ -108,6 +121,8 @@ public class CreateOrderRequest {
                 ", address='" + address + '\'' +
                 ", email='" + email + '\'' +
                 ", phoneNumber=" + phoneNumber +
+                ", products=" + products +
+                ", user=" + user +
                 '}';
     }
 }

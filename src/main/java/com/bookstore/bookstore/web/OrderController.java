@@ -1,8 +1,8 @@
 package com.bookstore.bookstore.web;
 
-import com.bookstore.bookstore.domain.Order;
 import com.bookstore.bookstore.service.OrderService;
 import com.bookstore.bookstore.transfer.order.CreateOrderRequest;
+import com.bookstore.bookstore.transfer.order.OrderResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +21,8 @@ public class OrderController {
     }
 
     @PostMapping
-    public ResponseEntity<Order> createOrder(@RequestBody CreateOrderRequest request) {
-        Order order = orderService.createOrder(request);
+    public ResponseEntity<OrderResponse> createOrder(@RequestBody CreateOrderRequest request) {
+        OrderResponse order = orderService.createOrder(request);
 
         return new ResponseEntity<>(order, HttpStatus.CREATED);
     }

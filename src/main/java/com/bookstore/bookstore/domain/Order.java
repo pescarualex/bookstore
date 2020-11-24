@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -21,11 +22,23 @@ public class Order {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany
-    private Set<Product> products;
+    @OneToMany(mappedBy = "order")
+    private Set<Product> products = new HashSet<>();
 
     @Embedded
     private Address address;
+
+    public void addProduct(Product product) {
+        products.add(product);
+
+        product.setOrder(this);
+    }
+
+    public void removeProduct(Product product) {
+        products.remove(product);
+
+        product.setOrder(this);
+    }
 
     public Set<Product> getProducts() {
         return products;
@@ -68,14 +81,7 @@ public class Order {
         this.address = address;
     }
 
-    @Override
-    public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", dateCreated=" + dateCreated +
-                ", address=" + address +
-                '}';
-    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -90,5 +96,14 @@ public class Order {
     @Override
     public int hashCode() {
         return (int) (id ^ (id >>> 32));
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", dateCreated=" + dateCreated +
+                ", address=" + address +
+                '}';
     }
 }
