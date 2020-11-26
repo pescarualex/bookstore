@@ -1,8 +1,9 @@
 package com.bookstore.bookstore.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
