@@ -3,6 +3,8 @@ package com.bookstore.bookstore.domain;
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
 
+//TODO: the version for finish project
+
 @Embeddable
 public class Address {
 
