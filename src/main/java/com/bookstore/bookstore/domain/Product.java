@@ -27,16 +27,6 @@ public class Product {
     @ManyToMany(mappedBy = "products")
     private Set<Cart> carts = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Order order;
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
 
     public Long getId() {
         return id;
